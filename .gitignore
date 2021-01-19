@@ -1,0 +1,16 @@
+/.env
+/.vscode
+/node_modules
+/package-lock.json
+/content.txt
+/English.txt
+/Español.txt
+/Русский.txt
+/Português.txt
+/Français.txt
+/Deutsch.txt
+/Polski.txt
+/汉语.txt
+/漢語.txt
+/日本語.txt
+/한국어.txt
