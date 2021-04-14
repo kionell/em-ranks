@@ -1,10 +1,10 @@
 {
   "name": "em-ranks",
-  "version": "1.0.0",
-  "description": "A simple script for ranks processing in the EM 5th MC spreadsheet",
+  "version": "1.1.0",
+  "description": "A simple script that will help you to process all ranks in the EM 5th MC spreadsheet.",
   "main": "ranks.js",
   "author": "Kionell",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "node-osu": "^2.2.0"
   }
