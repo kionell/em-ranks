@@ -94,7 +94,7 @@
 
   const langIndex = titles.findIndex(t => t === LANG_TITLE) || 1;
 
-  for (let i = 0; i < 5; ++i) {
+  for (let i = 0; i < entries.length; ++i) {
     const responses = entries[i].split('\t').map(x => x.trim());
     const entryLang = responses[langIndex];
   
