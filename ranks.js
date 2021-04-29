@@ -6,6 +6,7 @@
   const path = require('path');
 
   const FILENAME = process.argv[2] || './content.txt';
+  const OUTPUT_FILE = `./output.txt`;
   
   const LANG_TITLE = 'Select your language to start';
 
@@ -80,8 +81,7 @@
     };
   }
   
-  const errors = [];
-  const results = {};
+  const results = [];
 
   const table = fs.readFileSync(path.resolve(__dirname, FILENAME), 'utf8');
   const entries = table.split('\r\n');
@@ -94,7 +94,7 @@
 
   const langIndex = titles.findIndex(t => t === LANG_TITLE) || 1;
 
-  for (let i = 0; i < entries.length; ++i) {
+  for (let i = 0; i < 5; ++i) {
     const responses = entries[i].split('\t').map(x => x.trim());
     const entryLang = responses[langIndex];
   
@@ -117,10 +117,8 @@
           // Get a new rank range based on user data.
           const rankRange = getRankRange(+user.pp.rank);
 
-          if (!results[entryLang]) results[entryLang] = [];
-
-          // Save row with updated rank range.
-          results[entryLang][i] = rankRange;
+          // Save profile link and rank range.
+          results.push([profileLink, rankRange]);
 
           continue;
         }
@@ -129,21 +127,12 @@
       }
       catch (err) {
         // If link was wrong or user wasn't found.
-        errors.push(`Row ${i + 2}: ${profileLink || err.message}`);
+        results.push([profileLink, err.message]);
 
         continue;
       }
     }
   }
 
-  // Write files for each language.
-  for (const lang in results) {
-    if (results.hasOwnProperty(lang)) {
-      fs.writeFileSync(`./output/${lang}.txt`, results[lang].join('\r\n'));
-    }
-  }
-
-  if (errors.length) {
-    fs.writeFileSync(`./output/errors.txt`, errors.join('\r\n'));
-  }
+  fs.writeFileSync(OUTPUT_FILE, results.map(x => x.join('\t')).join('\r\n'));
 }());
